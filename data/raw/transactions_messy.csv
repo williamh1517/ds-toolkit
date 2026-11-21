@@ -1,0 +1,31 @@
+txn_id,date,customer,category,amount
+TXN-1001,2026-01-05,Acme Corp,Groceries,54.20
+TXN-1002,01/06/2026,acme corp,groceries,"$1,200.50"
+TXN-1003,07-Jan-2026,  ACME CORP  ,Utilities,88.00
+TXN-1004,2026-01-08,Globex Inc,Dining,"$45.00"
+TXN-1005,01/09/2026,globex inc  ,dining,12.99
+TXN-1006,10-Jan-2026,GLOBEX INC,,230.00
+TXN-1007,2026-01-12,Initech,Rent,"$2,400.00"
+TXN-1008,01/13/2026,initech ,rent,
+TXN-1009,14-Jan-2026,Initech,Utilities,"$130.75"
+TXN-1010,2026-01-15,Umbrella LLC,Travel,"$1,045.99"
+TXN-1011,01/16/2026,umbrella llc,travel,-75.00
+TXN-1012,17-Jan-2026,UMBRELLA LLC ,Groceries,"$ 62.10"
+TXN-1013,,Wayne Enterprises,Dining,19.95
+TXN-1014,01/20/2026,wayne enterprises,DINING,"$1,500.00"
+TXN-1015,21-Jan-2026,Wayne Enterprises,Supplies,310.4
+TXN-1016,2026-01-22,Stark Industries,supplies ,"$2,250.00"
+TXN-1017,01/23/2026,STARK INDUSTRIES,Travel,"$980.25"
+TXN-1018,24-Jan-2026,stark industries,travel,45
+TXN-1019,2026-01-26,,Groceries,73.15
+TXN-1020,01/27/2026,Soylent Co,GROCERIES,"$1,100.00 "
+TXN-1021,28-Jan-2026,soylent co,Utilities,210.5
+TXN-1022,2026-01-29,Soylent Co ,utilities,"$305.60"
+TXN-1023,02/02/2026,Hooli,Software,"$12,000.00"
+TXN-1024,03-Feb-2026,hooli,software ,499.00
+TXN-1025,2026-02-04,HOOLI,Dining,67.80
+TXN-1026,02/05/2026,Vandelay Industries,,"$150.00"
+TXN-1027,06-Feb-2026,vandelay industries ,Travel,"$3,420.75"
+TXN-1028,2026-02-09,Vandelay Industries,travel,-220.00
+TXN-1009,14-Jan-2026,Initech,Utilities,"$130.75"
+TXN-1017,01/23/2026,STARK INDUSTRIES,Travel,"$980.25"
