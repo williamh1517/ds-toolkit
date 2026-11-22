@@ -2,6 +2,7 @@
 
 Usage:
     python clean_csv.py data/raw/transactions_messy.csv data/clean/transactions_clean.csv
+    python clean_csv.py --drop-missing data/raw/transactions_messy.csv data/clean/transactions_clean.csv
 """
 
 import argparse
@@ -25,6 +26,11 @@ def parse_args():
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("input_path", help="messy CSV to read")
     parser.add_argument("output_path", help="cleaned CSV to write")
+    parser.add_argument(
+        "--drop-missing",
+        action="store_true",
+        help="drop rows with missing values instead of flagging them in is_incomplete",
+    )
     return parser.parse_args()
 
 
@@ -59,13 +65,17 @@ def count_unparsed(before, after):
 
 def report(stats):
     """Print the summary block."""
-    print(f"{'rows in:':<22}{stats['rows_in']:>4}")
-    print(f"{'duplicates removed:':<22}{stats['duplicates_removed']:>4}")
-    print(f"{'missing values:':<22}{int(stats['missing'].sum()):>4}")
+    print(f"{'rows in:':<26}{stats['rows_in']:>4}")
+    print(f"{'duplicates removed:':<26}{stats['duplicates_removed']:>4}")
+    print(f"{'missing values:':<26}{int(stats['missing'].sum()):>4}")
     for column, count in stats["missing"].items():
         if count:
-            print(f"  {column:<20}{count:>4}")
-    print(f"{'rows out:':<22}{stats['rows_out']:>4}")
+            print(f"  {column:<24}{count:>4}")
+    incomplete_label = (
+        "rows dropped (missing):" if stats["drop_missing"] else "rows flagged incomplete:"
+    )
+    print(f"{incomplete_label:<26}{stats['rows_incomplete']:>4}")
+    print(f"{'rows out:':<26}{stats['rows_out']:>4}")
 
     for label, count in (("date", stats["bad_dates"]), ("amount", stats["bad_amounts"])):
         if count:
@@ -117,6 +127,15 @@ def main():
     # so say so rather than dropping one of them.
     duplicate_ids = sorted(df.loc[df["txn_id"].duplicated(), "txn_id"].dropna().unique())
 
+    # Judged on the cleaned frame, so a date or amount that failed to parse
+    # counts as missing too, not just a cell that was blank to begin with.
+    incomplete = df[EXPECTED_COLUMNS].isna().any(axis=1)
+    rows_incomplete = int(incomplete.sum())
+    if args.drop_missing:
+        df = df.loc[~incomplete]
+    else:
+        df["is_incomplete"] = incomplete
+
     output_path.parent.mkdir(parents=True, exist_ok=True)
     df.to_csv(output_path, index=False, date_format="%Y-%m-%d")
 
@@ -126,6 +145,8 @@ def main():
             "duplicates_removed": duplicates_removed,
             "missing": missing,
             "rows_out": len(df),
+            "rows_incomplete": rows_incomplete,
+            "drop_missing": args.drop_missing,
             "bad_dates": bad_dates,
             "bad_amounts": bad_amounts,
             "duplicate_ids": duplicate_ids,
