@@ -11,8 +11,6 @@ from pathlib import Path
 
 import pandas as pd
 
-raise SystemExit("oops")
-
 EXPECTED_COLUMNS = ["txn_id", "date", "customer", "category", "amount"]
 
 # str.title() lowercases acronyms ("UMBRELLA LLC" -> "Umbrella Llc"); put them back.
