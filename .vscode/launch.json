@@ -1,0 +1,14 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Clean sample CSV",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/clean_csv.py",
+      "args": ["data/raw/transactions_messy.csv", "data/clean/transactions_clean.csv"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal"
+    }
+  ]
+}
