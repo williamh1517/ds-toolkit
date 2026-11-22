@@ -77,3 +77,15 @@ data/clean/         generated output, ignored by Git
   but differ otherwise, that is a real conflict for a human to settle.
 - **Missing-value counts describe the input file**, while the incomplete-row
   flag is judged after cleaning — so a value that failed to parse counts too.
+- **A virtual environment (`.venv`) instead of system Python.** Each project
+  gets its own Python and package versions, so installing something for one
+  project can't break another. `requirements.txt` rebuilds the exact same
+  environment on any machine.
+- **Missing values are flagged by default, not dropped.** Dropping rows
+  silently loses data and changes totals. A flag (`is_incomplete`) keeps every
+  row so a person can decide; `--drop-missing` is there when dropping is the
+  right call.
+- **`data/raw/` is committed, `data/clean/` is ignored.** The raw file is the
+  input the script needs, so it belongs in the repo. The clean file is
+  generated output: anyone can recreate it by running the script, and
+  committing it would let it fall out of sync with the code.
