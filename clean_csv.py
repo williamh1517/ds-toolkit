@@ -141,7 +141,7 @@ def main():
 
     report(
         {
-            "Input rows": rows_in,
+            "rows_in": rows_in,
             "duplicates_removed": duplicates_removed,
             "missing": missing,
             "rows_out": len(df),
