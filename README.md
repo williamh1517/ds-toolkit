@@ -22,7 +22,7 @@ amount` and writes a cleaned copy:
 ## Setup
 
 ```sh
-git clone <repo-url> ds-toolkit
+git clone https://github.com/williamh1517/ds-toolkit.git
 cd ds-toolkit
 python3.14 -m venv .venv
 .venv/bin/pip install -r requirements.txt
